@@ -23,7 +23,7 @@ jobs:
         api-key: $OIDC_TOKEN
         command: "push"
         format: "python"
-        owner: 'jake-org'                # Your Cloudsmith account name or org name (namespace) 
-        repo: 'cloudsmith-actions-demo'  # Your Cloudsmith Repository name (slug)
-        republish: 'true'                # needed ONLY if version is not changing
-        file: "example-package.tar.gz"   # Python package filename
+        owner: 'jake-org'                              # Your Cloudsmith account name or org name (namespace) 
+        repo: 'cloudsmith-actions-demo'                # Your Cloudsmith Repository name (slug)
+        republish: 'true'                              # needed ONLY if version is not changing
+        file: ${{ steps.package-info.outputs.name }}   # Python package filename
