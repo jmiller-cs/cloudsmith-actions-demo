@@ -1,0 +1,27 @@
+name: Cloudsmith Push Docker Image
+on: push
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    name: Python Push
+    steps:
+    - name: Get OIDC token
+      run: |
+        value=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | jq '.value')
+        echo "$value"
+        token=$(curl -X POST -H "Content-Type: application/json" -d "{\"oidc_token\":$value, \"service_slug\":\"oidc-service\"}" https://api.cloudsmith.io/openid/bart-demo-org/ | jq -r '.token')
+
+        echo "BTOKEN=Bearer $token" >> $GITHUB_ENV
+        echo "TTOKEN=$token" >> $GITHUB_ENV
+        echo "CLOUDSMITH_API_KEY=$token" >> $GITHUB_ENV
+    - uses: actions/checkout@v1
+    - name: Push
+      id: push
+      uses: cloudsmith-io/action@master
+      with:
+        command: "push"
+        format: "python"
+        owner: 'jake-org'                # Your Cloudsmith account name or org name (namespace) 
+        repo: 'cloudsmith-actions-demo'  # Your Cloudsmith Repository name (slug)
+        republish: 'true'                # needed ONLY if version is not changing
+        file: "example-package.tar.gz"   # Python package filename
