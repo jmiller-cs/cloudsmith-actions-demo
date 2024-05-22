@@ -4,6 +4,9 @@ jobs:
   push:
     runs-on: ubuntu-latest
     name: Python Push
+    permissions:
+      id-token: write # This is required for requesting the JWT
+      contents: read  # This is required for actions/checkout
     steps:
     - name: Get OIDC token
       run: |
