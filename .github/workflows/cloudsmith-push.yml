@@ -9,7 +9,7 @@ jobs:
       run: |
         value=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | jq '.value')
         echo "$value"
-        token=$(curl -X POST -H "Content-Type: application/json" -d "{\"oidc_token\":$value, \"service_slug\":\"oidc-service\"}" https://api.cloudsmith.io/openid/bart-demo-org/ | jq -r '.token')
+        token=$(curl -X POST -H "Content-Type: application/json" -d "{\"oidc_token\":$value, \"service_slug\":\"github-actions-demo\"}" https://api.cloudsmith.io/openid/jake-org/ | jq -r '.token')
 
         echo "BTOKEN=Bearer $token" >> $GITHUB_ENV
         echo "TTOKEN=$token" >> $GITHUB_ENV
