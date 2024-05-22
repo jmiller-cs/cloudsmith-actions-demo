@@ -22,6 +22,7 @@ jobs:
       id: push
       uses: cloudsmith-io/action@master
       with:
+        api-key: $token
         command: "push"
         format: "python"
         owner: 'jake-org'                # Your Cloudsmith account name or org name (namespace) 
