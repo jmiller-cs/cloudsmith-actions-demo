@@ -17,7 +17,7 @@ jobs:
         echo "BTOKEN=Bearer $token" >> $GITHUB_ENV
         echo "TTOKEN=$token" >> $GITHUB_ENV
         echo "CLOUDSMITH_API_KEY=$token" >> $GITHUB_ENV
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Push
       id: push
       uses: cloudsmith-io/action@master
