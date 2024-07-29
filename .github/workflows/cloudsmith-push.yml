@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Get OIDC token
       run: |
-        value=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=077de440303cade48c15d18d4ef6523edd9b8579" | jq '.value')
+        value=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=067de440303cade48c15d18d4ef6523edd9b8579" | jq '.value')
           echo "$value"
           token=$(curl -X POST -H "Content-Type: application/json" -d "{\"oidc_token\":$value, \"service_slug\":\"github-actions-demo\"}" https://api.cloudsmith.io/openid/jake-org/ | jq -r '.token')
           echo "BTOKEN=Bearer $token" >> $GITHUB_ENV
