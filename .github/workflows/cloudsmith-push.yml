@@ -15,7 +15,7 @@ jobs:
           token=$(curl -X POST -H "Content-Type: application/json" -d "{\"oidc_token\":$value, \"service_slug\":\"github-actions-demo\"}" https://api.cloudsmith.io/openid/jake-org/ | jq -r '.token')
           echo "BTOKEN=Bearer $token" >> $GITHUB_ENV
           echo "OIDC_TOKEN=$token" >> $GITHUB_ENV
-          curl --request DELETE --url https://api.cloudsmith.io/v1/orgs/jake-org/services/apitestservice/ --header "X-Api-Key: $OIDC_TOKEN" --header 'accept: application/json'
+          curl --request DELETE --url https://api.cloudsmith.io/v1/orgs/jake-org/services/apitestservice/ --header "X-Api-Key: $token" --header 'accept: application/json'
     - uses: actions/checkout@v2
     - name: Push
       id: push
